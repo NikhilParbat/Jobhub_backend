@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const CryptoJS = require("crypto-js");
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     createUser: async (req, res) => {
@@ -27,6 +28,10 @@ module.exports = {
             const depassword = decryptedpass.toString(CryptoJS.enc.Utf8);
 
             depassword !== req.body.password && res.status(401).json("Incorrect Password");
+            
+            const token = jwt.sign({userId: user._id}, process.env.JWT_SEC,{
+                expiresIn: '1h',
+            });
             
             const { password, __v, ...others} = user._doc;
 

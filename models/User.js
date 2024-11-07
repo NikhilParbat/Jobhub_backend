@@ -9,9 +9,12 @@ const UserSchema = new mongoose.Schema(
         isAdmin: {type: Boolean, default: false},
         isAgent: {type: Boolean, default: false},
         skills: {type: Array, default: false},
-        profile: {type: String, required: true, default: "https://cdn-icons-png.flaticon.com/512/5220/5220478.png"},
-        //updatedAt: {type: }   
-    }
+        profile: {
+            type: String, 
+            required: true, 
+            default: "https://cdn-icons-png.flaticon.com/512/5220/5220478.png"
+        },
+    }, {timestamps: true}
 );
 
 module.exports = mongoose.model("User", UserSchema)

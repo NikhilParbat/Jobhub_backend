@@ -20,7 +20,14 @@ const verifyToken = (req, res, next) =>{
 }
 
 const verifyAndAuthorization = (req, res, next)=>{
-    
+    verifyToken(req, res, () =>{
+        if(req.user.id == req.params.id){
+            next();
+        }else{
+            res.staus(403).json("You are restricted from performing this operation")
+        }
+    })
+
 }
 
-module.exports = {verifyToken}
+module.exports = {verifyToken, verifyAndAuthorization};
